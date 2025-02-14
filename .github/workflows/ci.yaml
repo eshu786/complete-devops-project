@@ -11,25 +11,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
+
       - name: Set Short SHA
-        run: |
-          echo "SHORT_SHA=$(echo ${GITHUB_SHA} | cut -c1-7)" >> $GITHUB_ENV
-      - name: Build Docker Image
-        run: |
-          docker build -t eshu786/complete-devops-project:${{ env.SHORT_SHA }} .
-      - name: Push Docker Image (No Login Needed for Public Repos)
-        run: |
-          docker tag my-app:latest eshu786/my-app:latest
-          docker push eshu786/my-app:latest
-      - name: Tag and Push Docker Image
-        run: |
-          docker tag eshu786/complete-devops-project:${{ env.SHORT_SHA }} eshu786/complete-devops-project:latest
-          docker push eshu786/complete-devops-project:${{ env.SHORT_SHA }}
-          docker push eshu786/complete-devops-project:latest
-      - name: Congure Git Author
-        run: |
-          git config --local user.email "srujaneswar23@gmail.com"
-          git config --local user.name "eshu786"
-      - name: Update Helm Chart with new image tag
-        run: |
-          sed -i "s/tag:.*/tag: ${{ env.SHORT_SHA }}/" ./complete-devops-project-time-printer/values.yaml
+        run: echo "SHORT_SHA=$(echo ${GITHUB_SHA} | cut -c1-7)" >> $GITHUB_ENV
+
+      - name:
