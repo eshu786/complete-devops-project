@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-
         uses: actions/checkout@v2
 
       - name: Set Short SHA
@@ -19,6 +18,10 @@ jobs:
       - name: Build Docker Image
         run: |
           docker build -t eshu786/complete-devops-project:${{ env.SHORT_SHA }} .
+
+      - name: Log in to Docker Hub
+        run: |
+          echo "Eshw@r786" | docker login -u "eshu786" --password-stdin
 
       - name: Push Docker Image
         run: |
@@ -34,4 +37,3 @@ jobs:
       - name: Update Helm Chart with new image tag
         run: |
           sed -i "s/tag:.*/tag: ${{ env.SHORT_SHA }}/" ./complete-devops-project-time-printer/values.yaml
-          
