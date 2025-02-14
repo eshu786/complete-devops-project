@@ -1,6 +1,6 @@
 image:
   repository: eshu786/complete-devops-project
-  tag: latest
+  tag: 48b22f3
   pullPolicy: IfNotPresent
 service:
   type: ClusterIP
