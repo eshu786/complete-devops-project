@@ -21,9 +21,11 @@ jobs:
         run: |
           docker tag my-app:latest eshu786/my-app:latest
           docker push eshu786/my-app:latest
-      - name: Push to Dockerhub
+      - name: Tag and Push Docker Image
         run: |
+          docker tag eshu786/complete-devops-project:${{ env.SHORT_SHA }} eshu786/complete-devops-project:latest
           docker push eshu786/complete-devops-project:${{ env.SHORT_SHA }}
+          docker push eshu786/complete-devops-project:latest
       - name: Congure Git Author
         run: |
           git config --local user.email "srujaneswar23@gmail.com"
